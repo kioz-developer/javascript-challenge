@@ -42,9 +42,16 @@ filterBtn.on("click", function() {
     let state = d3.select("#state").property("value");
     let country = d3.select("#country").property("value");
     let shape = d3.select("#shape").property("value");
+    
     filterData = tableData.filter(function(sighting) {
-        if (sighting.state == state)
+        // Applying optional filters
+        if ( (datetime != '' && sighting.datetime == datetime) ||
+             (city != '' && sighting.city == city) ||
+             (state != '' && sighting.state == state) ||
+             (country != '' && sighting.country == country) ||
+             (shape != '' && sighting.shape == shape) ) {
             return sighting;
+        }   
     });
 
     // Clear table
