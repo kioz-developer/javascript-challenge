@@ -28,3 +28,34 @@ function createOptions(dataList, selectElement) {
         row.html(value);
     });
 }
+
+let tbody = d3.select("tbody");
+let filterBtn = d3.select("#filter-btn");
+
+// Filter button click event handler
+filterBtn.on("click", function() {
+    d3.event.preventDefault();
+
+    // Filter data by entered date
+    let datetime = d3.select("#datetime").property("value");
+    let city = d3.select("#city").property("value");
+    let state = d3.select("#state").property("value");
+    let country = d3.select("#country").property("value");
+    let shape = d3.select("#shape").property("value");
+    filterData = tableData.filter(function(sighting) {
+        if (sighting.state == state)
+            return sighting;
+    });
+
+    // Clear table
+    tbody.html("");
+
+    // Fill table
+    filterData.forEach(function(sighting){
+        var row = tbody.append("tr");
+        Object.entries(sighting).forEach(([key, value]) => {
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
+});
