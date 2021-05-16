@@ -66,3 +66,12 @@ filterBtn.on("click", function() {
         });
     });
 });
+
+// Fill table with all data
+tableData.forEach(function(sighting){
+    var row = tbody.append("tr");
+    Object.entries(sighting).forEach(([key, value]) => {
+        var cell = row.append("td");
+        cell.text(value);
+    });
+});
